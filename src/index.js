@@ -6,7 +6,7 @@ const logger = new Logger("keep-warm-fc");
 /**
  * Plugin 插件入口
  * @param inputs 组件的入口参数
- * @param args 插件的自定义参数
+ * @param args 插件的自定义参数 {url: 请求的url, interval: 请求的频率（默认2m）}
  * @return inputs
  */
 
@@ -22,7 +22,7 @@ module.exports = async function index(inputs, args = {}) {
       region: lodash.get(inputs, "props.region"),
       service: lodash.get(inputs, "props.service"),
       function: {
-        name: "fc-warm",
+        name: "keep-warm",
         description: "Serverless Devs Web Framework Helper Function",
         codeUri: path.join(__dirname, "helper"),
         runtime: "python3",
