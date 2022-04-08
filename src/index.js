@@ -14,7 +14,7 @@ module.exports = async function index(inputs, args = {}) {
   logger.debug(`inputs params: ${JSON.stringify(inputs)}`);
   logger.debug(`args params: ${JSON.stringify(args)}`);
   if (lodash.isEmpty(args.url)) {
-    throw new Error("missing url parameter in fc-warm plugin.");
+    throw new Error("missing url parameter in keep-warm-fc plugin.");
   }
   const instance = await loadComponent("devsapp/fc");
   const newInputs = lodash.assign({}, inputs, {
