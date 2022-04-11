@@ -33,7 +33,7 @@ services:
     component: fc
     actions:
       post-deploy: # 在deploy之后运行
-        - plugin: /Users/shihuali/workspace/devsapp/keep-warm-fc/src/index.js
+        - plugin: ${path(..)}
           args:
             url: ${this.output.url.system_url}
     props:
