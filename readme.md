@@ -8,10 +8,10 @@
     <img src="https://img.shields.io/badge/License-MIT-green" alt="license">
   </a>
 </p>
-<!-- https://zhuanlan.zhihu.com/p/405534531 -->
-本插件帮助您通过[Serverless-Devs](https://github.com/Serverless-Devs/Serverless-Devs)工具和[FC组件](https://github.com/devsapp/fc) 实现实例预热，降低冷启动的概率。
+本插件帮助您通过 [Serverless-Devs](https://github.com/Serverless-Devs/Serverless-Devs)工具和 [FC组件](https://github.com/devsapp/fc) 实现实例预热，降低冷启动的概率。
 
 - [快速开始](快速开始)
+  - [冷启动优化](./codeStart.md)
   - [作用](#作用)
   - [快速上手](#快速上手)
   - [参数说明](#参数说明)
