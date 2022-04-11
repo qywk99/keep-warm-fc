@@ -6,7 +6,7 @@ const logger = new Logger("keep-warm-fc");
 /**
  * Plugin 插件入口
  * @param inputs 组件的入口参数
- * @param args 插件的自定义参数 {url: 请求的url, interval: 请求的频率（默认2m）}
+ * @param args 插件的自定义参数 {url: 请求的url, interval: 请求的频率（默认2m）, enable: true}
  * @return inputs
  */
 
@@ -26,7 +26,7 @@ module.exports = async function index(inputs, args = {}) {
         description: "Serverless Devs Web Framework Helper Function",
         codeUri: path.join(__dirname, "helper"),
         runtime: "python3",
-        timeout: 120,
+        timeout: 1,
         memorySize: 128,
         instanceConcurrency: 1,
         environmentVariables: {
@@ -40,7 +40,7 @@ module.exports = async function index(inputs, args = {}) {
           config: {
             payload: "{}",
             cronExpression: `@every ${lodash.get(args, "interval", "2m")}`,
-            enable: true,
+            enable: lodash.isUndefined(args.enable) ? true : args.enable,
           },
         },
       ],
