@@ -6,7 +6,7 @@ const logger = new Logger("keep-warm-fc");
 /**
  * Plugin 插件入口
  * @param inputs 组件的入口参数
- * @param args 插件的自定义参数 {url: 请求的url, interval: 请求的频率（默认2m）, enable: true}
+ * @param args 插件的自定义参数 {url: 请求的url, method: 请求方式(默认head), interval: 请求的频率（默认2m）}
  * @return inputs
  */
 
@@ -31,6 +31,9 @@ module.exports = async function index(inputs, args = {}) {
         instanceConcurrency: 1,
         environmentVariables: {
           KEEP_WARM_FC_URL: args.url,
+          KEEP_WARM_FC_METHOD: lodash.toLower(
+            lodash.get(args, "method", "head")
+          ),
         },
       },
       triggers: [

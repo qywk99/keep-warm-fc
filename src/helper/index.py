@@ -6,5 +6,6 @@ import os
 
 def handler(event, context):
     url = os.environ['KEEP_WARM_FC_URL']
-    res = requests.head(url)
-    return res.status_code
+    method = os.environ['KEEP_WARM_FC_METHOD']
+    res = requests.request(method, url)
+    print(res.status_code)

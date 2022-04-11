@@ -24,8 +24,9 @@ access: sub
 vars: # 全局变量
   region: cn-hangzhou
   service:
-    name: hello-world-service
+    name: hello-world-service4115
     description: "hello world by serverless devs"
+    logConfig: auto
 
 services:
   helloworld: # 业务名称/模块名称
@@ -34,7 +35,7 @@ services:
       post-deploy: # 在deploy之后运行
         - plugin: /Users/shihuali/workspace/devsapp/keep-warm-fc/src/index.js
           args:
-            url: http://start-fc-http-nodejs14.hello-world-service.1694024725952210.cn-hangzhou.fc.devsapp.net
+            url: ${this.output.url.system_url}
     props:
       region: ${vars.region} # 关于变量的使用方法，可以参考：https://www.serverless-devs.com/serverless-devs/yaml#变量赋值
       service: ${vars.service}
@@ -53,6 +54,7 @@ services:
             authType: anonymous
             methods:
               - GET
+              - HEAD
       customDomains:
         - domainName: auto
           protocol: HTTP
@@ -60,4 +62,4 @@ services:
             - path: /*
               methods:
                 - GET
-                - POST
+                - HEAD
