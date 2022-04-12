@@ -64,7 +64,7 @@ customDomains:
 ```
 
 ## 工作原理
-工作原理比较简单，就是在完成当前部署后。`post-deploy`的钩子函数中，部署一个[定时触发器](https://help.aliyun.com/document_detail/68172.html)的辅助函数，这个函数每隔`2s`会触发一次主函数(`Http函数`)中的URL，达到降低冷启动概率的目的。
+工作原理比较简单，就是在完成当前部署后。`post-deploy`的钩子函数中，部署一个[定时触发器](https://help.aliyun.com/document_detail/68172.html)的辅助函数，这个函数每隔`2s`（默认是2秒，用户可以通过`cronExpression`参数配置）会触发一次主函数(`Http函数`)中的URL，达到降低冷启动概率的目的。
 ![](https://img.alicdn.com/imgextra/i2/O1CN01iDeAjC1IktsqMLN8u_!!6000000000932-2-tps-550-300.png)
 
 ### 实现代码
