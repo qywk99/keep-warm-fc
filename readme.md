@@ -16,8 +16,9 @@
   - [作用](#作用)
   - [快速上手](#快速上手)
   - [参数说明](#参数说明)
-
+  - [源码参考](https://github.com/devsapp/start-plugin/tree/master/keep-warm-fc/src)
 - [工作原理](#工作原理)
+- [关于我们](#关于我们)
 ## 快速开始
 ### 作用
 本插件主要通过[定时触发器预热函数](./codeStart.md#使用定时触发器预热函数)达到有效`降低冷启动的概率`目的
@@ -25,6 +26,8 @@
 ### 快速上手
 `website-fc`本质是针对[FC组件](https://serverless-devs.com/fc/readme)进行增强。
 还是遵循FC组件的[Yaml规范](https://serverless-devs.com/fc/yaml/readme)
+
+> 通过`s init start-keep-warm-fc` 快速体验`keep-warm-fc`插件
 
 在执行部署钩子`post-deploy`之后声明插件, 同时声明Http函数的访问链接
 ```
@@ -64,7 +67,7 @@ customDomains:
 ```
 
 ## 工作原理
-工作原理比较简单，就是在完成当前部署后。`post-deploy`的钩子函数中，部署一个[定时触发器](https://help.aliyun.com/document_detail/68172.html)的辅助函数，这个函数每隔`2s`会触发一次主函数(`Http函数`)中的URL，达到降低冷启动概率的目的。
+工作原理比较简单，就是在完成当前部署后。`post-deploy`的钩子函数中，部署一个[定时触发器](https://help.aliyun.com/document_detail/68172.html)的辅助函数，函数名格式为`_FC_PLUGIN_keep-warm-${serviceName}-${functionName}`，这个函数每隔`2s`会触发一次主函数(`Http函数`)中的URL，达到降低冷启动概率的目的。
 ![](https://img.alicdn.com/imgextra/i2/O1CN01iDeAjC1IktsqMLN8u_!!6000000000932-2-tps-550-300.png)
 
 ### 实现代码
@@ -74,3 +77,13 @@ def handler(event, context):
   res = requests.head(url)
   return res.status_code
 ```
+
+# 关于我们
+- Serverless Devs 工具：
+    - 仓库：[https://www.github.com/serverless-devs/serverless-devs](https://www.github.com/serverless-devs/serverless-devs)    
+      > 欢迎帮我们增加一个 :star2: 
+    - 官网：[https://www.serverless-devs.com/](https://www.serverless-devs.com/)
+- 阿里云函数计算组件：
+    - 仓库：[https://github.com/devsapp/fc](https://github.com/devsapp/fc)
+    - 帮助文档：[https://www.serverless-devs.com/fc/readme](https://www.serverless-devs.com/fc/readme)
+- 钉钉交流群：33947367    

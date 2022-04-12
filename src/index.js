@@ -17,12 +17,16 @@ module.exports = async function index(inputs, args = {}) {
     throw new Error("missing url parameter in keep-warm-fc plugin.");
   }
   const instance = await loadComponent("devsapp/fc");
+  const service = lodash.get(inputs, "props.service");
+  
+  const WARM_FC_FUNCTION_NAME = `_FC_PLUGIN_keep-warm-${lodash(service, 'name')}-${lodash.get(inputs, "props.function.name")}`;
+
   const newInputs = lodash.assign({}, inputs, {
     props: {
+      service,
       region: lodash.get(inputs, "props.region"),
-      service: lodash.get(inputs, "props.service"),
       function: {
-        name: "keep-warm",
+        name: WARM_FC_FUNCTION_NAME,
         description: "Serverless Devs Web Framework Helper Function",
         codeUri: path.join(__dirname, "helper"),
         runtime: "python3",

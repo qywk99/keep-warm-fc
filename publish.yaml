@@ -2,7 +2,7 @@ Type: Plugin
 Name: keep-warm-fc
 Provider:
   - 阿里云
-Version: 0.0.2
+Version: 0.0.3
 Description: 定时请求url的辅助函数
 HomePage: https://github.com/devsapp/keep-warm-fc
 Tags: #标签详情
