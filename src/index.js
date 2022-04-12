@@ -19,7 +19,8 @@ module.exports = async function index(inputs, args = {}) {
   const instance = await loadComponent("devsapp/fc");
   const service = lodash.get(inputs, "props.service");
   
-  const WARM_FC_FUNCTION_NAME = `_FC_PLUGIN_keep-warm-${lodash(service, 'name')}-${lodash.get(inputs, "props.function.name")}`;
+
+  const WARM_FC_FUNCTION_NAME = `_FC_PLUGIN_keep-warm-${lodash.get(service, 'name')}-${lodash.get(inputs, "props.function.name")}`;
 
   const newInputs = lodash.assign({}, inputs, {
     props: {
