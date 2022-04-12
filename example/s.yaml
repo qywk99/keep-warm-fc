@@ -24,7 +24,7 @@ access: sub
 vars: # 全局变量
   region: cn-hangzhou
   service:
-    name: hello-world-service4115
+    name: hello-world-service
     description: "hello world by serverless devs"
     logConfig: auto
 

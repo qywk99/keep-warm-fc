@@ -34,16 +34,34 @@ actions:
       args:
         url: http://start-fc-http-nodejs14.hello-world-service.1694024725952210.cn-hangzhou.fc.devsapp.net
 ```
+
 ### 参数说明
 | 参数名称 | 默认值 | 参数含义 | 必填 |
 | --- | --- | --- |--- |
 | url  | - |  Http函数的访问地址    | true |
+| method  | head |  Timer请求方法    | false |
 | cronExpression  | 2m |  请求的频率(默认2分钟)   | false |
 | enable  | true |  定时函数是否开启    | false |
 
-
-
-
+> 特别提醒：默认的请求`method`为`head`生效的前提是trigger以及domain支持head方法。配置如下：
+```
+triggers:
+  - name: httpTrigger
+    type: http
+    config:
+      authType: anonymous
+      methods:
+        - GET
+        - HEAD # 这里需要支持HEAD方法，Timer触发器使用
+customDomains:
+  - domainName: auto
+    protocol: HTTP
+    routeConfigs:
+      - path: /*
+        methods:
+          - GET
+          - HEAD # 这里需要支持HEAD方法，Timer触发器使用
+```
 
 ## 工作原理
 工作原理比较简单，就是在完成当前部署后。`post-deploy`的钩子函数中，部署一个[定时触发器](https://help.aliyun.com/document_detail/68172.html)的辅助函数，这个函数每隔`2s`会触发一次主函数(`Http函数`)中的URL，达到降低冷启动概率的目的。
