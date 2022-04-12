@@ -18,9 +18,9 @@ module.exports = async function index(inputs, args = {}) {
   }
   const instance = await loadComponent("devsapp/fc");
   const service = lodash.get(inputs, "props.service");
-  
+  const serviceFunction = lodash.get(inputs, "props.function");
 
-  const WARM_FC_FUNCTION_NAME = `_FC_PLUGIN_keep-warm-${lodash.get(service, 'name')}-${lodash.get(inputs, "props.function.name")}`;
+  const WARM_FC_FUNCTION_NAME = `_FC_PLUGIN_keep-warm-${lodash.get(service, 'name')}-${lodash.get(serviceFunction, 'name')}`;
 
   const newInputs = lodash.assign({}, inputs, {
     props: {
@@ -28,7 +28,7 @@ module.exports = async function index(inputs, args = {}) {
       region: lodash.get(inputs, "props.region"),
       function: {
         name: WARM_FC_FUNCTION_NAME,
-        description: "Serverless Devs Web Framework Helper Function",
+        description: `当前定时函数由Serverless Devs自动创建，用于定时预热函数【${lodash.get(serviceFunction, 'name')}】`,
         codeUri: path.join(__dirname, "helper"),
         runtime: "python3",
         timeout: 1,
