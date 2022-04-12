@@ -39,7 +39,7 @@ actions:
 | --- | --- | --- | --- | --- |
 | url  | -- |  Http函数的访问地址    | true |
 | cronExpression  | 2m |  请求的频率(默认2分钟)    | false |
-| enable  | true |  定时函数是否开启    | | false |
+| enable  | true |  定时函数是否开启    | false |
 
 ## 工作原理
 工作原理比较简单，就是在完成当前部署后。`post-deploy`的钩子函数中，部署一个[定时触发器](https://help.aliyun.com/document_detail/68172.html)的辅助函数，这个函数每隔`2s`会触发一次主函数(`Http函数`)中的URL，达到降低冷启动概率的目的。
