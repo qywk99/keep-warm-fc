@@ -16,6 +16,7 @@
   - [作用](#作用)
   - [快速上手](#快速上手)
   - [参数说明](#参数说明)
+  - [注意事项](#注意事项)
   - [源码参考](https://github.com/devsapp/start-plugin/tree/master/keep-warm-fc/src)
 - [工作原理](#工作原理)
 - [关于我们](#关于我们)
@@ -65,6 +66,10 @@ customDomains:
           - GET
           - HEAD # 这里需要支持HEAD方法，Timer触发器使用
 ```
+
+### 注意事项
+1. 如果您需要关闭定时触发器，可以设置参数 `enable: false`, 或者删除定时函数
+2. 如果您需要定时触发器生效，最佳实践是将`trigger`的`method`方法，添加上`HEAD`类型。这样的话，性能是相对最好的
 
 ## 工作原理
 工作原理比较简单，就是在完成当前部署后。`post-deploy`的钩子函数中，部署一个[定时触发器](https://help.aliyun.com/document_detail/68172.html)的辅助函数，函数名格式为`_FC_PLUGIN_keep-warm-${serviceName}-${functionName}`，这个函数每隔`2s`（默认是2秒，用户可以通过`cronExpression`参数配置）会触发一次主函数(`Http函数`)中的URL，达到降低冷启动概率的目的。
